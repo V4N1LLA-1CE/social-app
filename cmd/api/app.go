@@ -17,15 +17,20 @@ type config struct {
 	addr string
 }
 
-func (app *application) routes() *chi.Mux {
+func (app *application) mount() *chi.Mux {
 	// init router
 	r := chi.NewRouter()
 
-	// middleware
+	// global middleware
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 
-	// routes
-	r.Get("/health", app.healthCheckHandler)
+	// health routes
+	r.Route("/v1", func(r chi.Router) {
+		r.Get("/health", app.healthCheckHandler)
+	})
 
 	return r
 }
