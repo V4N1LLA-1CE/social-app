@@ -11,6 +11,7 @@ func main() {
 		config: cfg,
 	}
 
-	log.Println("server listening on port :8080")
-	log.Fatal(app.serve())
+	r := app.routes()
+
+	log.Fatal(app.serve(r))
 }
