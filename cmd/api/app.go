@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 type application struct {
@@ -17,8 +18,13 @@ type config struct {
 }
 
 func (app *application) routes() *chi.Mux {
+	// init router
 	r := chi.NewRouter()
 
+	// middleware
+	r.Use(middleware.Logger)
+
+	// routes
 	r.Get("/health", app.healthCheckHandler)
 
 	return r
