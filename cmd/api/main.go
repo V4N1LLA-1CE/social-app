@@ -1,10 +1,15 @@
 package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+
+	env "github.com/V4N1LLA-1CE/social-app/internal"
+)
 
 func main() {
 	cfg := config{
-		addr: ":8080",
+		addr: fmt.Sprintf(":%s", env.GetString("PORT", "8080")),
 	}
 
 	app := &application{
