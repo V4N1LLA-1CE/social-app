@@ -13,11 +13,11 @@ func main() {
 		addr: fmt.Sprintf(":%s", env.GetString("PORT", "8080")),
 	}
 
-	s := store.NewStore(nil)
+	store := store.NewStore(nil)
 
 	app := &application{
 		config: cfg,
-		store:  s,
+		store:  store,
 	}
 
 	mux := app.mount()
