@@ -5,10 +5,10 @@ import (
 	"database/sql"
 )
 
-type userRepo struct {
+type UserRepo struct {
 	db *sql.DB
 }
 
-func (r *userRepo) Create(ctx context.Context) error {
+func (r *UserRepo) Create(ctx context.Context) error {
 	return nil
 }

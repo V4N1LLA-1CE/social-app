@@ -15,12 +15,12 @@ type UserRepository interface {
 }
 
 type PostRepository interface {
-	Create(context.Context) error
+	Create(context.Context, *Post) error
 }
 
 func NewStore(db *sql.DB) Store {
 	return Store{
-		Users: &userRepo{db: db},
-		Posts: &postRepo{db: db},
+		Users: &UserRepo{db: db},
+		Posts: &PostRepo{db: db},
 	}
 }
