@@ -11,7 +11,7 @@ type Store struct {
 }
 
 type UserRepository interface {
-	Create(context.Context) error
+	Create(context.Context, *User) error
 }
 
 type PostRepository interface {
@@ -20,7 +20,7 @@ type PostRepository interface {
 
 func NewStore(db *sql.DB) Store {
 	return Store{
-		Users: &UserRepo{db: db},
-		Posts: &PostRepo{db: db},
+		Users: &UserStore{db: db},
+		Posts: &PostStore{db: db},
 	}
 }

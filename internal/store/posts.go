@@ -18,11 +18,11 @@ type Post struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-type PostRepo struct {
+type PostStore struct {
 	db *sql.DB
 }
 
-func (r *PostRepo) Create(ctx context.Context, post *Post) error {
+func (r *PostStore) Create(ctx context.Context, post *Post) error {
 	query := `
   INSERT INTO posts (content, title, user_id, tags)
   VALUES ($1, $2, $3, $4)
