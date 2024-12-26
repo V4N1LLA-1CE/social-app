@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	env "github.com/V4N1LLA-1CE/social-app/internal"
+	"github.com/V4N1LLA-1CE/social-app/internal/env"
 )
 
 func main() {
