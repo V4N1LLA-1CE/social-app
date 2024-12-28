@@ -1,15 +1,14 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: socialnetwork-pg
+    container_name: ${POSTGRES_CONTAINER_NAME}
     environment:
-      POSTGRES_DB: socialnetwork
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: toor
-    volumes:
-      - social-db-data:/var/lib/postgresql/data
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    # volumes:
+    #   - social-db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
-volumes:
-  social-db-data:
+# volumes:
+#   social-db-data:
