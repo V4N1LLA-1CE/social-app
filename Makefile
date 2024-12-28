@@ -8,15 +8,15 @@ pg-exec:
 
 # db migrate up
 pg-migrateup:
-	migrate -path db/migrations -database "${POSTGRES_DSN}" -verbose up ${n}
+	migrate -path cmd/api/migrate -database "${POSTGRES_DSN}" -verbose up ${n}
 
 # db migrate down
 pg-migratedown:
-	migrate -path db/migrations -database "${POSTGRES_DSN}" -verbose down ${n}
+	migrate -path cmd/api/migrate -database "${POSTGRES_DSN}" -verbose down ${n}
 
 # force migrate to specified version
 pg-fmigrate:
-	migrate -path db/migrations -database "${POSTGRES_DSN}" force ${v}
+	migrate -path cmd/api/migrate -database "${POSTGRES_DSN}" force ${v}
 
 # run with live reloading
 watch:
