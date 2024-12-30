@@ -58,4 +58,10 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		netio.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// send response
+	if err := netio.Write(w, http.StatusCreated, netio.Envelope{"user": user}, nil); err != nil {
+		netio.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
