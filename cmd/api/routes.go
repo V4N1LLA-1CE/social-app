@@ -19,8 +19,8 @@ func (app *application) mount() *chi.Mux {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	// health routes
-	r.Route("/v1", func(r chi.Router) {
+	// routes
+	r.Route("/api/v1", func(r chi.Router) {
 		r.Get("/health", healthHandler.Check)
 	})
 

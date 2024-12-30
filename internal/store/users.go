@@ -18,7 +18,7 @@ type UserStore struct {
 	db *sql.DB
 }
 
-func (r *UserStore) Create(ctx context.Context, user *User) error {
+func (s *UserStore) Create(ctx context.Context, user *User) error {
 	query := `
   INSERT INTO users (username, email, password) 
   VALUES ($1, $2, $3)
@@ -31,7 +31,7 @@ func (r *UserStore) Create(ctx context.Context, user *User) error {
 		user.Password,
 	}
 
-	err := r.db.QueryRowContext(ctx, query, args...).Scan(
+	err := s.db.QueryRowContext(ctx, query, args...).Scan(
 		&user.ID,
 		&user.CreatedAt,
 	)
