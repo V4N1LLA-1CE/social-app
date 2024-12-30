@@ -19,6 +19,7 @@ func main() {
 			maxIdleConns: env.GetInt("POSTGRES_MAXIDLECONNS", 30),
 			maxIdleTime:  time.Duration(env.GetInt("POSTGRES_MAXIDLETIME", 15)) * time.Minute,
 		},
+		env: env.GetString("ENVIRONMENT", "dev"),
 	}
 
 	conn, err := database.New(cfg.db.dsn, cfg.db.maxOpenConns, cfg.db.maxIdleConns, cfg.db.maxIdleTime)
