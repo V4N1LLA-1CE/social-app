@@ -1,2 +1,2 @@
-# social-app
-An open-sourced all in one social platform for developers
+# some sort of e-platform
+Not sure where this is going atm
