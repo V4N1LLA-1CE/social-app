@@ -1,5 +1,7 @@
 github.com/V4N1LLA-1CE/netio v0.1.2 h1:XQydN/Hk0P7dB2raxC8QKsbjn1pSvIf+c04tI7ug+Gs=
 github.com/V4N1LLA-1CE/netio v0.1.2/go.mod h1:tRkeBOmB7wuD+R6Xty2W2ZoNn4C+bq9xnIr80exfrhA=
+github.com/V4N1LLA-1CE/netio v0.1.31 h1:iIoHf/5v3mSoF6fR9wDIbretaXNFb6Tm9117HXrOwwQ=
+github.com/V4N1LLA-1CE/netio v0.1.31/go.mod h1:tRkeBOmB7wuD+R6Xty2W2ZoNn4C+bq9xnIr80exfrhA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

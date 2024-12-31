@@ -3,7 +3,7 @@ module github.com/V4N1LLA-1CE/social-app
 go 1.23.4
 
 require (
-	github.com/V4N1LLA-1CE/netio v0.1.2
+	github.com/V4N1LLA-1CE/netio v0.1.31
 	github.com/go-chi/chi/v5 v5.2.0
 	github.com/go-chi/cors v1.2.1
 	github.com/jackc/pgx/v5 v5.7.2
