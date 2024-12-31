@@ -3,6 +3,12 @@ package store
 import (
 	"context"
 	"database/sql"
+	"errors"
+)
+
+var (
+	ErrDuplicateEmail = errors.New("account with this email already exists")
+	ErrRecordNotFound = errors.New("record cannot be found")
 )
 
 type Store struct {
