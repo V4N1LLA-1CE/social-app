@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS posts (
   content text NOT NULL,
   title text NOT NULL,
   user_id bigint NOT NULL,
-  tags []text NOT NULL DEFAULT '{}',
+  tags text[] NOT NULL DEFAULT '{}',
   created_at timestamptz NOT NULL DEFAULT NOW(),
   updated_at timestamptz NOT NULL DEFAULT NOW()
 );
