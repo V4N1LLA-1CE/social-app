@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/V4N1LLA-1CE/social-app/internal/handlers/health"
+	"github.com/V4N1LLA-1CE/social-app/internal/handlers/post"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
@@ -10,6 +11,7 @@ import (
 func (app *application) mount() *chi.Mux {
 	// initialise handlers
 	healthHandler := health.New(app.config.env)
+	postHandler := post.New(app.store)
 
 	// init router
 	r := chi.NewRouter()
@@ -35,7 +37,14 @@ func (app *application) mount() *chi.Mux {
 
 	// routes
 	r.Route("/api/v1", func(r chi.Router) {
+
+		// healthcheck
 		r.Get("/health", healthHandler.Check)
+
+		// post routes: /api/v1/posts
+		r.Route("/posts", func(r chi.Router) {
+			r.Post("/", postHandler.CreatePost)
+		})
 	})
 
 	return r
