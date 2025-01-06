@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS posts (
 -- add fk constraint
 ALTER TABLE posts
 ADD CONSTRAINT fk_users_posts FOREIGN KEY (user_id)
-  REFERENCES users(id)
+  REFERENCES users(id);
