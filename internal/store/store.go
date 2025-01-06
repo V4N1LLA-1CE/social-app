@@ -3,24 +3,25 @@ package store
 import (
 	"context"
 	"database/sql"
-	"errors"
-)
-
-var (
-	ErrDuplicateEmail = errors.New("account with this email already exists")
-	ErrRecordNotFound = errors.New("record cannot be found")
 )
 
 type Store struct {
 	Users UserRepository
-}
-
-type UserRepository interface {
-	Create(context.Context, *User) error
+	Posts PostRepository
 }
 
 func NewStore(db *sql.DB) Store {
 	return Store{
 		Users: &UserStore{db: db},
+		Posts: &PostStore{db: db},
 	}
+}
+
+// all repositories
+type UserRepository interface {
+	Create(context.Context, *User) error
+}
+
+type PostRepository interface {
+	Create(context.Context, *Post) error
 }
