@@ -1,4 +1,4 @@
--- drop users table
+-- drop table
 DROP TABLE IF EXISTS users;
 
 -- drop citext extension
