@@ -3,6 +3,11 @@ package store
 import (
 	"context"
 	"database/sql"
+	"errors"
+)
+
+var (
+	ErrNotFound = errors.New("Record not found")
 )
 
 type Store struct {
@@ -24,4 +29,5 @@ type UserRepository interface {
 
 type PostRepository interface {
 	Create(context.Context, *Post) error
+	GetById(context.Context, int64) (*Post, error)
 }
