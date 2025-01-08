@@ -18,7 +18,7 @@ func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
 	var input CreatePostPayload
 	err := netio.Read(w, r, &input)
 	if err != nil {
-		netio.Error(w, "error", err.Error, http.StatusBadRequest)
+		netio.Error(w, "error", err, http.StatusBadRequest, nil)
 		return
 	}
 
@@ -32,12 +32,12 @@ func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err = h.store.Posts.Create(ctx, post); err != nil {
-		netio.Error(w, "error", err.Error(), http.StatusInternalServerError)
+		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
 		return
 	}
 
 	if err = netio.Write(w, http.StatusCreated, netio.Envelope{"post": post}, nil); err != nil {
-		netio.Error(w, "error", err.Error(), http.StatusInternalServerError)
+		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
 		return
 	}
 }

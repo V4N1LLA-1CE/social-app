@@ -13,7 +13,7 @@ import (
 func (h *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "postID"), 10, 64)
 	if err != nil {
-		netio.Error(w, "error", err.Error(), http.StatusInternalServerError)
+		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
 		return
 	}
 
@@ -24,17 +24,17 @@ func (h *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 		switch {
 
 		case errors.Is(err, store.ErrNotFound):
-			netio.Error(w, "error", err.Error(), http.StatusNotFound)
+			netio.Error(w, "error", err, http.StatusNotFound, nil)
 			return
 
 		default:
-			netio.Error(w, "error", err.Error(), http.StatusInternalServerError)
+			netio.Error(w, "error", err, http.StatusInternalServerError, nil)
 			return
 		}
 	}
 
 	if err = netio.Write(w, http.StatusOK, netio.Envelope{"post": post}, nil); err != nil {
-		netio.Error(w, "error", err.Error(), http.StatusInternalServerError)
+		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
 		return
 	}
 }

@@ -24,7 +24,5 @@ func (h *Handler) Check(w http.ResponseWriter, r *http.Request) {
 		"timestamp":   time.Now(),
 	}
 
-	if err := netio.Write(w, http.StatusOK, netio.Envelope{"health": health}, nil); err != nil {
-		http.Error(w, err.Error(), http.StatusOK)
-	}
+	netio.Write(w, http.StatusOK, netio.Envelope{"health": health}, nil)
 }
