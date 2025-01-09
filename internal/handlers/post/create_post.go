@@ -18,26 +18,42 @@ func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
 	var input CreatePostPayload
 	err := netio.Read(w, r, &input)
 	if err != nil {
-		netio.Error(w, "error", err, http.StatusBadRequest, nil)
+		netio.Error(w, "error", http.StatusBadRequest, nil)
 		return
 	}
 
-	userId := 1
+	if input.Tags == nil {
+		input.Tags = []string{}
+	}
+
+	// perform validation of payload
+	v := netio.NewValidator()
+	v.Check(len(input.Title) <= 100, "title", "must not exceed 100 characters")
+	v.Check(len(input.Title) > 0, "title", "must not be empty")
+	v.Check(len(input.Content) <= 1000, "content", "must not exceed 1000 characters")
+	v.Check(len(input.Content) > 0, "content", "must not be empty")
+	v.Check(!netio.HasDuplicates(input.Tags), "tags", "must not have duplicates")
+	if !v.Valid() {
+		netio.Error(w, "error", http.StatusUnprocessableEntity, v)
+		return
+	}
+
 	ctx := r.Context()
 	post := &store.Post{
 		Title:   input.Title,
 		Content: input.Content,
-		UserID:  int64(userId),
+		UserID:  int64(1),
 		Tags:    input.Tags,
 	}
 
 	if err = h.store.Posts.Create(ctx, post); err != nil {
-		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		netio.Error(w, "error", http.StatusInternalServerError, nil)
 		return
 	}
 
 	if err = netio.Write(w, http.StatusCreated, netio.Envelope{"post": post}, nil); err != nil {
-		netio.Error(w, "error", err, http.StatusInternalServerError, nil)
+		netio.Error(w, "error", http.StatusInternalServerError, nil)
 		return
 	}
 }
