@@ -33,7 +33,20 @@ func (h *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if err = netio.Write(w, http.StatusOK, netio.Envelope{"post": post}, nil); err != nil {
+	comments, err := h.store.Comments.GetByPostID(ctx, post.ID)
+	if err != nil {
+		netio.Error(w, "error", http.StatusInternalServerError, nil)
+		return
+	}
+
+	post.Comments = comments
+
+	// build response
+	e := netio.Envelope{
+		"post": post,
+	}
+
+	if err = netio.Write(w, http.StatusOK, e, nil); err != nil {
 		netio.Error(w, "error", http.StatusInternalServerError, nil)
 		return
 	}

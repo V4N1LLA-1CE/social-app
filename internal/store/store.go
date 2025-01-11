@@ -11,14 +11,16 @@ var (
 )
 
 type Store struct {
-	Users UserRepository
-	Posts PostRepository
+	Users    UserRepository
+	Posts    PostRepository
+	Comments CommentRepository
 }
 
 func NewStore(db *sql.DB) Store {
 	return Store{
-		Users: &UserStore{db: db},
-		Posts: &PostStore{db: db},
+		Users:    &UserStore{db},
+		Posts:    &PostStore{db},
+		Comments: &CommentStore{db},
 	}
 }
 
@@ -30,4 +32,8 @@ type UserRepository interface {
 type PostRepository interface {
 	Create(context.Context, *Post) error
 	GetById(context.Context, int64) (*Post, error)
+}
+
+type CommentRepository interface {
+	GetByPostID(context.Context, int64) ([]Comment, error)
 }
