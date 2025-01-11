@@ -1,4 +1,3 @@
--- create posts table
 CREATE TABLE IF NOT EXISTS posts (
   id bigserial PRIMARY KEY,
   content text NOT NULL,
@@ -9,7 +8,6 @@ CREATE TABLE IF NOT EXISTS posts (
   updated_at timestamptz NOT NULL DEFAULT NOW()
 );
 
--- add fk constraint
 ALTER TABLE posts
-ADD CONSTRAINT fk_users_posts FOREIGN KEY (user_id)
-  REFERENCES users(id);
+ADD CONSTRAINT users_posts_fk FOREIGN KEY (user_id)
+  REFERENCES users(id) ON DELETE CASCADE;
